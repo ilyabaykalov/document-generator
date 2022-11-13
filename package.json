@@ -1,0 +1,21 @@
+{
+  "name": "document-generator",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "file-saver": "^2.0.5",
+    "jszip": "^3.10.1",
+    "libreoffice-convert": "^1.4.1",
+    "moment": "^2.29.4",
+    "node-xlsx": "^0.21.0",
+    "office-to-pdf": "^4.0.0"
+  }
+}
