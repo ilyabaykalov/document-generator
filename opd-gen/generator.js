@@ -4,8 +4,11 @@ import JSZip from 'jszip';
 
 import moment from 'moment';
 
+// путь до файла-шаблона
+const templateFilename = './templates/opd_template.docx';
+
 // указываем путь до файла с данными
-const filename = './raw-data/opd_data_13.11.22.xlsm';
+const filename = './raw/opd_data_13.11.22.xlsm';
 
 // указываем дату подписания
 const dateOfSign = '13.11.2022';
@@ -44,7 +47,7 @@ const personData = mainSheetData
     dateOfSign,
   }));
 
-fs.readFile('./templates/opd_template.docx', (err, data) => {
+fs.readFile(templateFilename, (err, data) => {
   new JSZip()
     .loadAsync(data)
     .then(zip => {
@@ -93,7 +96,6 @@ fs.readFile('./templates/opd_template.docx', (err, data) => {
 });
 
 const cleanXML = (xmlFile) => {
-  //почистить шаблон до правильного вида переменных {fieldName}
   const regExp = /({.*?})/sg;
   const regExpAdditional = /(<.*?>)/g;
 
