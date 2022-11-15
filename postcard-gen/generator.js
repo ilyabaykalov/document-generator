@@ -1,4 +1,5 @@
 const printVersionTemplatePath = './templates/print-version/template.html';
+const webVersionTemplatePath = './templates/web-version/template.html';
 
 const buildPostcardData = () => {
   const postcardForm = this.document.getElementById('postcard-form');
@@ -17,13 +18,12 @@ const buildPostcardData = () => {
   const data = {
     fullName, title,
     text_1, text_2, text_3, text_4,
-    date, isWebVersion,
+    date,
   };
 
   localStorage.setItem('data', JSON.stringify(data));
 
-  // TODO: добавить ссылку на электронную открытку
-  postcardForm.setAttribute('action', printVersionTemplatePath);
+  postcardForm.setAttribute('action', isWebVersion ? webVersionTemplatePath : printVersionTemplatePath);
 
   postcardForm.submit();
 };

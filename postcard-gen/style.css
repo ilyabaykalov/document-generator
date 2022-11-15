@@ -13,6 +13,11 @@ form {
 	margin-top: 10px;
 }
 
+.input-block > label.required::after {
+	content: '*';
+	color: red;
+}
+
 .input-block > input,
 .input-block > textarea {
 	width: 300px;
