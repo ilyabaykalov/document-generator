@@ -1,0 +1,42 @@
+* {
+	font-family: 'Times New Roman', sans-serif;
+}
+
+form {
+	width: max-content;
+}
+
+.input-block {
+	display: flex;
+	justify-content: space-between;
+	width: 550px;
+	margin-top: 10px;
+}
+
+.input-block > label.required::after {
+	content: '*';
+	color: red;
+}
+
+.input-block > input,
+.input-block > textarea {
+	width: 300px;
+	padding: 5px;
+	border: 1px solid black;
+	border-radius: 5px;
+}
+
+.input-block > textarea {
+	height: 100px;
+	resize: none;
+}
+
+.button-block {
+	display: flex;
+	justify-content: space-evenly;
+	margin-top: 15px;
+}
+
+.button-block > button {
+	height:40px;
+}

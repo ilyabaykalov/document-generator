@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang='en'>
+<head>
+	<meta charset='UTF-8'>
+	<title>Генератор открыток</title>
+	<link rel='stylesheet' href='./style.css'>
+</head>
+<body>
+	<form id='postcard-form'>
+		<div class='input-block'>
+			<label for='full-name' class='required'>Кому открытка (в род. падеже)?</label>
+			<input type='text' id='full-name' name='full-name' placeholder='Байкалову Илье Сергеевичу'>
+		</div>
+		<div class='input-block'>
+			<label for='title' class='required'>Уважаемый...</label>
+			<input type='text' id='title' name='title' placeholder='Уважаемый Илья Сергеевич!'>
+		</div>
+		<div class='input-block'>
+			<label for='text_1' class='required'>Что-то еще написать</label>
+			<input type='text' id='text_1' name='text_1' placeholder='Примите мои самые искренние поздравления с 26-летием!'>
+		</div>
+		<div class='input-block'>
+			<label for='text_2' class='required'>Что-то еще написать</label>
+			<textarea id='text_2' name='text_2' placeholder='От всей души желаю Вам здоровья, счастья, удачи и радости! Пусть всегда рядом будет всесторонняя поддержка родных, близких и друзей, а богатый жизненный опыт, оптимизм и житейская мудрость помогают Вам уверенно идти вперед!'></textarea>
+		</div>
+		<div class='input-block'>
+			<label for='text_3'>Что-то еще написать</label>
+			<textarea id='text_3' name='text_3' placeholder='Ваша целеустремленность, упорство и желание достигать новых высот - те качества, которые сопровождают Вас не только на профессиональной сфере, но и по жизни. Мы гордится таким замечательным человеком!'></textarea>
+		</div>
+		<div class='input-block'>
+			<label for='text_4'>Что-то еще написать</label>
+			<textarea id='text_4' name='text_4' placeholder='Благодарю Вас за высокий профессионализм, нацеленность на достижение результата и ответственный подход к своему делу!'></textarea>
+		</div>
+		<div class='input-block'>
+			<label for='date' class='required'>г. Москва, (просто выбери дату)</label>
+			<input type='date' id='date' name='date'>
+		</div>
+		<div class='input-block'>
+			<label for='isWebVersion'>Нужна электронная версия</label>
+			<input type='checkbox' id='isWebVersion' name='isWebVersion'>
+		</div>
+		<div class='button-block'>
+			<button onclick='buildPostcardData()'>Сгенерировать открытку</button>
+		</div>
+	</form>
+	<script src='./generator.js'></script>
+</body>
+</html>
