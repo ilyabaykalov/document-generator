@@ -1,6 +1,29 @@
 const printVersionTemplatePath = './templates/print-version/template.html';
 const webVersionTemplatePath = './templates/web-version/template.html';
 
+const onLoadGenerator = () => {
+  if (confirm('Загрузить последние данные?')) {
+    const data = JSON.parse(localStorage.getItem('data'));
+
+    const {
+      fullName, title,
+      text_1, text_2, text_3, text_4,
+      date,
+    } = data;
+
+    this.document.getElementById('full-name').value = fullName || '';
+
+    this.document.getElementById('title').value = title || '';
+
+    this.document.getElementById('text_1').value = text_1 || '';
+    this.document.getElementById('text_2').value = text_2 || '';
+    this.document.getElementById('text_3').value = text_3 || '';
+    this.document.getElementById('text_4').value = text_4 || '';
+
+    this.document.getElementById('date').value = date || '';
+  }
+}
+
 const buildPostcardData = () => {
   const postcardForm = this.document.getElementById('postcard-form');
 
