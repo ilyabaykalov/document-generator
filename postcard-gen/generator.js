@@ -1,4 +1,4 @@
-const printVersionTemplatePath = './templates/print_postcard_template.html';
+const printVersionTemplatePath = './templates/print-version/template.html';
 
 const buildPostcardData = () => {
   const postcardForm = this.document.getElementById('postcard-form');
@@ -57,7 +57,7 @@ const fillTemplate = () => {
   const dateFormatOption = {
     day: 'numeric',
     month: 'long',
-    year: 'numeric'
+    year: 'numeric',
   };
 
   const formattedDate = new Date(date)
