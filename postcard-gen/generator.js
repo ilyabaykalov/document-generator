@@ -1,52 +1,27 @@
-const printVersionTemplatePath = './templates/print-version/template.html';
-const webVersionTemplatePath = './templates/web-version/template.html';
-
 const onLoadGenerator = () => {
   if (confirm('Загрузить последние данные?')) {
     const data = JSON.parse(localStorage.getItem('data'));
 
-    const {
-      fullName, title,
-      text_1, text_2, text_3, text_4,
-      date,
-    } = data;
-
-    this.document.getElementById('full-name').value = fullName || '';
-
-    this.document.getElementById('title').value = title || '';
-
-    this.document.getElementById('text_1').value = text_1 || '';
-    this.document.getElementById('text_2').value = text_2 || '';
-    this.document.getElementById('text_3').value = text_3 || '';
-    this.document.getElementById('text_4').value = text_4 || '';
-
-    this.document.getElementById('date').value = date || '';
+    for (const key in data) {
+      this.document.getElementById(key).value = data[key] || '';
+    }
   }
-}
+};
 
 const buildPostcardData = () => {
   const postcardForm = this.document.getElementById('postcard-form');
 
   const formData = new FormData(postcardForm);
 
-  const fullName = formData.get('full-name');
-  const title = formData.get('title');
-  const text_1 = formData.get('text_1');
-  const text_2 = formData.get('text_2');
-  const text_3 = formData.get('text_3');
-  const text_4 = formData.get('text_4');
-  const date = formData.get('date');
-  const isWebVersion = formData.get('isWebVersion') === 'on';
+  const data = {};
 
-  const data = {
-    fullName, title,
-    text_1, text_2, text_3, text_4,
-    date,
-  };
+  for (const key of formData.keys()) {
+    data[key] = formData.get(key);
+  }
 
   localStorage.setItem('data', JSON.stringify(data));
 
-  postcardForm.setAttribute('action', isWebVersion ? webVersionTemplatePath : printVersionTemplatePath);
+  postcardForm.setAttribute('action', `./templates/${data.isWebVersion ? 'web' : 'print'}-version/template.html`);
 
   postcardForm.submit();
 };
@@ -54,37 +29,25 @@ const buildPostcardData = () => {
 const fillTemplate = () => {
   const data = JSON.parse(localStorage.getItem('data'));
 
-  const {
-    fullName, title,
-    text_1, text_2, text_3, text_4,
-    date,
-  } = data;
+  const { full_name, date } = data;
 
-  const [
-    lastName, name, middleName,
-    nameInitial = name[0], middleNameInitial = middleName[0],
-  ] = fullName.split(' ');
+  const [lastName, name, middleName] = full_name.split(' ');
 
-  this.document.title = `Поздравление ${ lastName } ${ nameInitial }.${ middleNameInitial }.`;
+  this.document.title = `Поздравление ${ lastName } ${ name[0] }.${ middleName[0] }.`;
 
   this.document.getElementById('last-name').textContent = lastName;
   this.document.getElementById('name').textContent = `${ name } ${ middleName }`;
 
-  this.document.getElementById('title').textContent = title;
+  for (const key in data) {
+    if (key === 'full_name' || key === 'date') continue;
 
-  this.document.getElementById('text_1').textContent = text_1;
-  this.document.getElementById('text_2').textContent = text_2;
-  this.document.getElementById('text_3').textContent = text_3;
-  this.document.getElementById('text_4').textContent = text_4;
-
-  const dateFormatOption = {
-    day: 'numeric',
-    month: 'long',
-    year: 'numeric',
-  };
+    this.document.getElementById(key).textContent = data[key];
+  }
 
   const formattedDate = new Date(date)
-    .toLocaleDateString('ru-RU', dateFormatOption)
+    .toLocaleDateString('ru-RU', {
+      day: 'numeric', month: 'long', year: 'numeric',
+    })
     .slice(0, -3);
 
   this.document.getElementById('date').textContent = `г. Москва, ${ formattedDate } года`;
