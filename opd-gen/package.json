@@ -1,0 +1,19 @@
+{
+  "name": "opd-generator",
+  "version": "1.4.1",
+  "type": "module",
+  "license": "ISC",
+  "author": {
+    "name": "Ilya Baykalov",
+    "email": "ilyabaykalov@icloud.com",
+    "telegram": "@ilyabaykalov"
+  },
+  "scripts": {
+    "start": "node generator.js"
+  },
+  "dependencies": {
+    "jszip": "^3.10.1",
+    "moment": "^2.29.4",
+    "node-xlsx": "^0.21.0"
+  }
+}
