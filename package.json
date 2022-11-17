@@ -9,7 +9,9 @@
     "telegram": "@ilyabaykalov"
   },
   "scripts": {
-    "opd-gen": "npm start --prefix opd-gen",
-    "postcard-gen": "npm start --prefix postcard-gen"
+    "build": "npm run build --prefix opd-gen && npm run build --prefix postcard-gen",
+    "clean": "npm run clean --prefix opd-gen && npm run clean --prefix postcard-gen",
+    "opd-gen": "npm run start --prefix opd-gen",
+    "postcard-gen": "npm run start --prefix postcard-gen"
   }
 }

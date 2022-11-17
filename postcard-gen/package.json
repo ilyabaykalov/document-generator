@@ -9,6 +9,8 @@
     "telegram": "@ilyabaykalov"
   },
   "scripts": {
+    "build": "npm install",
+    "clean": "rm package-lock.json",
     "start": "open generator.html"
   }
 }
