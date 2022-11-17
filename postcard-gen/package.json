@@ -1,0 +1,14 @@
+{
+  "name": "postcard-generator",
+  "version": "2.7.4",
+  "type": "module",
+  "license": "ISC",
+  "author": {
+    "name": "Ilya Baykalov",
+    "email": "ilyabaykalov@icloud.com",
+    "telegram": "@ilyabaykalov"
+  },
+  "scripts": {
+    "start": "open generator.html"
+  }
+}
