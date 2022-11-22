@@ -34,6 +34,8 @@ const renameFilesByRangeFromFolderName = () => {
 
     fs.rm(currentFolder, { recursive: true }, ()=> console.log(`Папка ${folder} удалена!`));
   });
+
+  console.log('Готово!');
 };
 
 const compareFilenames = (a, b) => {
@@ -57,8 +59,6 @@ const renameFile = (currentFolder, filename, ext, index) => {
   fs.rename(inputPath, outputPath, (err) => {
     if (err) throw err;
   });
-
-  console.log('Готово!');
 };
 
 renameFilesByRangeFromFolderName();
