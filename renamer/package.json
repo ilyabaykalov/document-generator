@@ -1,0 +1,16 @@
+{
+  "name": "renamer",
+  "version": "0.1.0",
+  "type": "module",
+  "license": "ISC",
+  "author": {
+    "name": "Ilya Baykalov",
+    "email": "ilyabaykalov@icloud.com",
+    "telegram": "@ilyabaykalov"
+  },
+  "scripts": {
+    "build": "npm install",
+    "clean": "rm package-lock.json && rm -r node_modules && rm -r output",
+    "start": "node renamer.js"
+  }
+}
