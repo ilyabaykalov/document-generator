@@ -5,14 +5,18 @@ import moment from 'moment';
 
 import { join, resolve } from 'path';
 import fs from 'fs';
+import { makeDirIfNotExist } from '../utils/fs-utils.js';
 
 const __dirname = resolve();
+
+const rawFolder = join(__dirname, 'raw');
+makeDirIfNotExist(rawFolder);
 
 // путь до файла-шаблона
 const templateFilename = join(__dirname, 'template', 'opd_template.docx');
 
 // указываем путь до файла с данными
-const filename = join(__dirname, 'raw', 'opd_data_13.11.22.xlsm');
+const filename = join(rawFolder, 'opd_data_13.11.22.xlsm');
 
 // указываем дату подписания
 const dateOfSign = '13.11.2022';
@@ -112,9 +116,7 @@ const saveDocumentsIntoArchive = (output) => {
       const folderName = join(__dirname, 'output');
       const filename = `Согласия от ${ dateOfSign }.zip`;
 
-      if (!fs.existsSync(folderName)) {
-        fs.mkdirSync(folderName);
-      }
+      makeDirIfNotExist(folderName);
 
       fs.writeFile(`${ folderName }/${ filename }`, content, (error) => {
         if (error) console.error(error);

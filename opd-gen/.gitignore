@@ -6,5 +6,8 @@
 # npm
 package-lock.json
 
+# raw
+/raw
+
 # production
 /output
