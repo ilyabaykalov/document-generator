@@ -39,7 +39,7 @@ const fillTemplate = () => {
   this.document.getElementById('name').textContent = `${ name } ${ middleName }`;
 
   for (const key in data) {
-    if (key === 'full_name' || key === 'date') continue;
+    if (['full_name', 'date', 'isWebVersion'].includes(key)) continue;
 
     this.document.getElementById(key).textContent = data[key];
   }
