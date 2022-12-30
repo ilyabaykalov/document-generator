@@ -1,0 +1,88 @@
+body {
+	margin: 0;
+	padding: 10px 0;
+	width: 21cm;
+	display: flex;
+	justify-content: center;
+}
+
+.container {
+	display: flex;
+	flex-direction: column;
+	row-gap: 10px;
+}
+
+.ticket {
+	width: 20.5cm;
+	height: 10cm;
+	display: flex;
+	justify-content: space-evenly;
+	border: 1px solid black;
+	box-sizing: border-box;
+	background: url('./assets/background.jpg');
+	background-size: contain;
+}
+
+.ticket:nth-child(2n) {
+	page-break-after: always;
+}
+
+.tables {
+	display: flex;
+	width: max-content;
+	height: 100%;
+	flex-direction: column;
+	justify-content: space-evenly;
+}
+
+.table {
+	border-collapse: collapse;
+	background-color: rgba(255, 255, 255, .6);
+	-webkit-backdrop-filter: blur(5px);
+	backdrop-filter: blur(5px);
+}
+
+.table td {
+	width: 50px;
+	height: 50px;
+	border-color: black;
+	border-style: solid;
+	border-width: 1px;
+	font-family: Tahoma, sans-serif;
+	font-size: 24px;
+	font-weight: bold;
+	text-align: center;
+}
+
+.info {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+}
+
+.text {
+	font-family: Tahoma, sans-serif;
+	font-size: 18px;
+}
+
+.text--small {
+	font-size: 16px;
+}
+
+.text--large {
+	font-size: 20px;
+}
+
+.text--bold {
+	font-weight: bold;
+}
+
+.divider {
+	width: 90%;
+	margin: 0 15px;
+	border-top: 1px solid black;
+}
+
+.barcode-wrapper {
+	text-align: center;
+}
