@@ -1,0 +1,153 @@
+[
+  {
+    "firstTableData": [
+      [ 9, 10, 28, null, null, 51, 69, null, null ],
+      [ null, null, null, 36, null, 53, 61, 75, 88 ],
+      [ 2, null, null, 30, 42, null, null, 70, 90 ]
+    ],
+    "secondTableData": [
+      [ null, 14, 26, null, null, 56, 63, 77, null ],
+      [ 3, null, null, 32, 45, 52, null, null, 86 ],
+      [ 6, 15, 21, 37, null, null, null, null, 80 ]
+    ],
+    "editionNumber": 1473,
+    "ticketNumber": 147301011018,
+    "id": "C31E",
+    "packageNumber": 192679
+  }, {
+  "firstTableData": [
+    [ null, 19, null, 34, 43, 50, null, null, 87 ],
+    [ 8, 17, 25, null, null, null, 66, null, 85 ],
+    [ null, null, 20, 35, 40, null, 64, 71, null ]
+  ],
+  "secondTableData": [
+    [ null, null, 24, 33, 41, 58, null, 74, null ],
+    [ 1, 16, null, null, 44, null, null, 78, 83 ],
+    [ null, 13, 23, 38, null, 57, 65, null, null ]
+  ],
+  "editionNumber": 1473,
+  "ticketNumber": 147301011016,
+  "id": "862A",
+  "packageNumber": 192679
+}, {
+  "firstTableData": [
+    [ null, 18, null, 35, 48, 52, 69, null, null ],
+    [ 2, null, 28, 31, null, 50, null, null, 86 ],
+    [ 8, null, 23, null, 49, null, null, 74, 80 ]
+  ],
+  "secondTableData": [
+    [ null, 16, null, 30, 45, null, 62, null, 90 ],
+    [ null, null, 26, 37, null, null, 61, 70, 81 ],
+    [ 1, 13, null, null, 40, 54, null, 71, null ]
+  ],
+  "editionNumber": 1473,
+  "ticketNumber": 147301011013,
+  "id": "A57A",
+  "packageNumber": 192679
+}, {
+  "firstTableData": [
+    [ null, 10, null, 30, null, null, 66, 71, 89 ],
+    [ 2, null, 23, null, 45, null, 61, null, 82 ],
+    [ 5, 15, 26, 38, null, 59, null, null, null ]
+  ],
+  "secondTableData": [
+    [ 8, null, null, 35, 40, null, 68, null, 83 ],
+    [ null, 17, 22, null, 41, 52, null, null, 80 ],
+    [ 9, 18, null, null, null, 58, 62, 77, null ]
+  ],
+  "editionNumber": 1473,
+  "ticketNumber": 147301011012,
+  "id": "4358",
+  "packageNumber": 192679
+}, {
+  "firstTableData": [
+    [ null, 18, 24, 37, null, 58, null, 75, null ],
+    [ null, null, null, 34, 44, 52, null, 77, 83 ],
+    [ 7, 19, null, null, 42, null, 65, null, 84 ]
+  ],
+  "secondTableData": [
+    [ null, null, 26, 30, 45, null, 61, 76, null ],
+    [ 9, 12, 28, null, null, null, 67, null, 81 ],
+    [ 1, 16, null, null, 47, 57, null, null, 85 ]
+  ],
+  "editionNumber": 1473,
+  "ticketNumber": 147301092216,
+  "id": "8B30",
+  "packageNumber": 193491
+}, {
+  "firstTableData": [
+    [ 3, 14, null, null, null, 56, 62, null, 90 ],
+    [ 6, null, 22, null, 48, null, null, 78, 88 ],
+    [ null, 11, null, 32, 41, null, 66, 79, null ]
+  ],
+  "secondTableData": [
+    [ null, 10, 20, null, 49, 54, null, null, 80 ],
+    [ 8, null, null, 38, null, 55, 64, 73, null ],
+    [ null, 17, 27, 39, null, null, 69, null, 82 ]
+  ],
+  "editionNumber": 1473,
+  "ticketNumber": 147301092214,
+  "id": "070C",
+  "packageNumber": 193491
+}, {
+  "firstTableData": [
+    [ null, 10, 28, 38, null, null, 61, null, 89 ],
+    [ null, 15, null, 32, null, 51, null, 71, 81 ],
+    [ 3, null, 24, null, 48, null, 60, 76, null ]
+  ],
+  "secondTableData": [
+    [ null, null, 23, 34, 43, 56, null, 77, null ],
+    [ 4, 13, 25, null, null, null, null, 74, 85 ],
+    [ null, 18, null, 33, 40, 50, 66, null, null ]
+  ],
+  "editionNumber": 1473,
+  "ticketNumber": 147301092212,
+  "id": "2AC2",
+  "packageNumber": 193491
+}, {
+  "firstTableData": [
+    [ null, 13, 23, 39, 41, null, null, null, 83 ],
+    [ 3, null, null, null, null, 50, 61, 79, 86 ],
+    [ 4, 10, null, 33, null, 59, 69, null, null ]
+  ],
+  "secondTableData": [
+    [ null, null, 28, null, 46, 51, 66, null, 80 ],
+    [ 9, null, 20, 34, null, null, null, 71, 82 ],
+    [ 8, 12, null, 38, 47, null, null, 73, null ]
+  ],
+  "editionNumber": 1473,
+  "ticketNumber": 147301092218,
+  "id": "D5AB",
+  "packageNumber": 193491
+}, {
+  "firstTableData": [
+    [ 7, 17, 29, 30, null, null, null, null, 87 ],
+    [ 9, null, null, null, 42, null, 64, 78, 84 ],
+    [ null, 12, null, null, 41, 59, 63, 75, null ]
+  ],
+  "secondTableData": [
+    [ 2, null, 22, 36, null, 53, null, 73, null ],
+    [ 8, null, null, 35, 47, null, null, 79, 90 ],
+    [ null, 16, null, null, 46, 57, 68, null, 83 ]
+  ],
+  "editionNumber": 1473,
+  "ticketNumber": 147301092211,
+  "id": "2930",
+  "packageNumber": 193491
+}, {
+  "firstTableData": [
+    [ null, null, 26, 38, null, 52, 62, 72, null ],
+    [ 5, null, 27, 31, null, 55, null, null, 86 ],
+    [ 1, 19, null, null, 49, null, 69, null, 82 ]
+  ],
+  "secondTableData": [
+    [ null, 14, 20, null, 44, 54, null, null, 80 ],
+    [ null, 11, null, null, 45, 58, 65, null, 88 ],
+    [ 6, null, 21, 39, null, null, 67, 70, null ]
+  ],
+  "editionNumber": 1473,
+  "ticketNumber": 147301092213,
+  "id": "576B",
+  "packageNumber": 193491
+}
+]
