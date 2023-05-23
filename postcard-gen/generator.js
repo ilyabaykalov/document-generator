@@ -1,5 +1,3 @@
-// window.jsPDF = window.jspdf.jsPDF;
-
 const onLoadGenerator = () => {
   if (confirm('Загрузить последние данные?')) {
     const data = JSON.parse(localStorage.getItem('data'));
