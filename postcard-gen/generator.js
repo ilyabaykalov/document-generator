@@ -80,7 +80,8 @@ const onDownload = (initials) => {
 
   if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)){
     const blob = pdf.output();
-    window.open(URL.createObjectURL(new Blob([blob])));
+    // window.open(URL.createObjectURL(new Blob([blob])));
+    window.open(pdf.output("bloburl"), "_blank");
   } else {
     pdf.save();
   }
