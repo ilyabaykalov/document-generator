@@ -74,17 +74,25 @@ const onDownload = (initials) => {
     }
   };
 
-  const pdf = html2pdf()
+  // const pdf = html2pdf()
+  //     .set(options)
+  //     .from(printForm);
+  //
+  // if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)){
+  //   const blob = pdf.output();
+  //   // window.open(URL.createObjectURL(new Blob([blob])));
+  //   window.open(pdf.output("bloburl"), "_blank");
+  // } else {
+  //   pdf.save();
+  // }
+  html2pdf()
       .set(options)
-      .from(printForm);
-
-  if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)){
-    const blob = pdf.output();
-    // window.open(URL.createObjectURL(new Blob([blob])));
-    window.open(pdf.output("bloburl"), "_blank");
-  } else {
-    pdf.save();
-  }
+      .from(printForm)
+      .toPdf()
+      .get('pdf')
+      .then(pdf => {
+        window.open(pdf.output('bloburl'), '_blank');
+      });
 }
 
 // const onDownload = () => {
