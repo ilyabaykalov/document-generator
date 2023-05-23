@@ -34,8 +34,9 @@ const fillTemplate = () => {
   const { full_name, date } = data;
 
   const [lastName, name, middleName] = full_name.split(' ');
+  const initials = `${ lastName } ${ name[0] }.${ middleName[0] }.`
 
-  this.document.title = `Поздравление ${ lastName } ${ name[0] }.${ middleName[0] }.`;
+  this.document.title = `Поздравление ${ initials }`;
 
   this.document.getElementById('last-name').textContent = lastName;
   this.document.getElementById('name').textContent = `${ name } ${ middleName }`;
@@ -54,15 +55,15 @@ const fillTemplate = () => {
 
   this.document.getElementById('date').textContent = `г. Москва, ${ formattedDate } года`;
 
-  setTimeout(onDownload, 300);
+  setTimeout(onDownload.bind(null, initials), 300);
 };
 
-const onDownload = () => {
+const onDownload = (initials) => {
   const printForm = document.querySelector(".page");
 
-  html2pdf(printForm, {
-    filename: 'test.pdf',
-    image: {type: 'png'},
+  const options = {
+    filename: `${initials}.pdf`,
+    image: { type: 'png' },
     html2canvas: {
       useCORS: true,
       allowTaint: true,
@@ -71,7 +72,18 @@ const onDownload = () => {
     jsPDF: {
       orientation: 'landscape',
     }
-  });
+  };
+
+  const pdf = html2pdf()
+      .set(options)
+      .from(printForm);
+
+  if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)){
+    const blob = pdf.output();
+    window.open(URL.createObjectURL(new Blob([blob])));
+  } else {
+    pdf.save();
+  }
 }
 
 // const onDownload = () => {
