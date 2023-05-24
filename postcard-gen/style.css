@@ -39,6 +39,11 @@ form {
 	margin-top: 10px;
 }
 
+#full_name-error, #title-error {
+	color: red;
+	display: none;
+}
+
 .input-block > label.required::after {
 	content: '*';
 	color: red;

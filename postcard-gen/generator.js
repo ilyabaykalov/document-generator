@@ -1,4 +1,9 @@
-const buildPostcardData = () => {
+const validatorState = {
+  'full_name': false,
+  'title': false
+}
+
+const buildPostcardData = (event) => {
   const postcardForm = this.document.getElementById('postcard-form');
 
   const formData = new FormData(postcardForm);
@@ -9,12 +14,46 @@ const buildPostcardData = () => {
     data[key] = formData.get(key);
   }
 
-  localStorage.setItem('data', JSON.stringify(data));
+  if (validatorState['full_name'] && validatorState['title']) {
+    localStorage.setItem('data', JSON.stringify(data));
 
-  postcardForm.setAttribute('action', `./templates/${data.isWebVersion ? 'web' : 'print'}-version/template.html`);
+    postcardForm.setAttribute('action', `./templates/${data.isWebVersion ? 'web' : 'print'}-version/template.html`);
 
-  postcardForm.submit();
+    postcardForm.submit();
+  } else {
+    alert('Проверьте правильность введенных значений');
+
+    event.preventDefault();
+  }
 };
+
+const validateFullName = ({target}) => {
+  const { value } = target;
+
+  const regExp = /^[А-Я][а-я]+\s[А-Я][а-я]+\s[А-Я][а-я]+$/;
+  const isValid = regExp.test(value);
+
+  if (!isValid)
+    this.document.getElementById('full_name-error').setAttribute('style', 'display: block');
+  else
+    this.document.getElementById('full_name-error').setAttribute('style', 'display: none');
+
+  validatorState['full_name'] = isValid;
+}
+
+const validateTitle = ({target}) => {
+  const { value } = target;
+
+  const regExp = /^Уважаем(ый|ая)\s[А-Я][а-я]+\s[А-Я][а-я]+!$/;
+  const isValid = regExp.test(value);
+
+  if (!isValid)
+    this.document.getElementById('title-error').setAttribute('style', 'display: block');
+  else
+    this.document.getElementById('title-error').setAttribute('style', 'display: none');
+
+  validatorState['title'] = isValid;
+}
 
 const fillTemplate = () => {
   const data = JSON.parse(localStorage.getItem('data'));
@@ -90,6 +129,9 @@ const loadData = (templateName) => {
       ? templates[templateName]
       : JSON.parse(localStorage.getItem('data'));
 
+  validatorState['full_name'] = !templateName;
+  validatorState['title'] = !templateName;
+
   for (const key in data) {
     this.document.getElementById(key).value = data[key] || '';
   }
@@ -97,6 +139,9 @@ const loadData = (templateName) => {
 
 const resetForm = () => {
   const keys = ['full_name', 'title', 'text_1', 'text_2', 'text_3', 'text_4', 'date'];
+
+  validatorState['full_name'] = false;
+  validatorState['title'] = false;
 
   keys.forEach(key => this.document.getElementById(key).value = '');
 }
