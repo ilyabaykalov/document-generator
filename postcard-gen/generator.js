@@ -132,24 +132,26 @@ const loadData = (templateName) => {
       ? templates[templateName]
       : JSON.parse(localStorage.getItem('data'));
 
-  if (!templateName) {
-    validatorState['full_name'] = true;
-    validatorState['title'] = true;
-
-    this.document.getElementById('full_name-error').setAttribute('style', 'display: none');
-    this.document.getElementById('title-error').setAttribute('style', 'display: none');
-  }
+  toggleErrorMessage(!templateName);
 
   for (const key in data) {
     this.document.getElementById(key).value = data[key] || '';
   }
 }
 
+const toggleErrorMessage = (isValid) => {
+  validatorState['full_name'] = isValid;
+  validatorState['title'] = isValid;
+
+  this.document.getElementById('full_name-error').setAttribute('style', `display: ${isValid ? 'none' : 'block'}`);
+  this.document.getElementById('title-error').setAttribute('style', `display: ${isValid ? 'none' : 'block'}`);
+
+}
+
 const resetForm = () => {
   const keys = ['full_name', 'title', 'text_1', 'text_2', 'text_3', 'text_4', 'date'];
 
-  validatorState['full_name'] = false;
-  validatorState['title'] = false;
+  toggleErrorMessage(false);
 
   keys.forEach(key => this.document.getElementById(key).value = '');
 }
