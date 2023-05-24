@@ -2,6 +2,32 @@
 	font-family: 'Times New Roman', sans-serif;
 }
 
+.wrapper {
+	display: flex;
+	gap: 20px;
+}
+
+.templates {
+	display: flex;
+	flex-direction: column;
+	border: 1px solid black;
+	height: max-content;
+	padding: 15px;
+}
+
+.templates > p {
+	margin: 0;
+	font-weight: bold;
+}
+
+.templates > button {
+	margin: 10px 0;
+}
+
+.templates > hr {
+	width: 100%;
+}
+
 form {
 	width: max-content;
 }
