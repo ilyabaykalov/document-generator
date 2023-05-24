@@ -102,14 +102,17 @@ const onDownload = (isWebVersion) => {
     }
   };
 
-  html2pdf()
+  const pdf = html2pdf()
       .set(options)
       .from(printForm)
       .toPdf()
-      .get('pdf')
-      .then(pdf => {
-        window.open(pdf.output('bloburl'), '_blank');
-      });
+      .get('pdf');
+
+  if (/Android|iPhone/i.test(navigator.userAgent)){
+    pdf.then(pdf => {
+      window.open(pdf.output('bloburl'), '_blank');
+    });
+  } else window.print();
 }
 
 const loadData = (templateName) => {
