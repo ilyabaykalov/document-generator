@@ -29,7 +29,7 @@ const buildPostcardData = () => {
 const fillTemplate = () => {
   const data = JSON.parse(localStorage.getItem('data'));
 
-  const { full_name, date } = data;
+  const { full_name, date, isWebVersion } = data;
 
   const [lastName, name, middleName] = full_name.split(' ');
   const initials = `${ lastName } ${ name[0] }.${ middleName[0] }.`
@@ -53,23 +53,23 @@ const fillTemplate = () => {
 
   this.document.getElementById('date').textContent = `г. Москва, ${ formattedDate } года`;
 
-  setTimeout(onDownload.bind(null, initials), 300);
+  setTimeout(onDownload.bind(null, isWebVersion), 300);
 };
 
-const onDownload = (initials) => {
-  const printForm = document.querySelector(".page");
+const onDownload = (isWebVersion) => {
+  const printForm = document.querySelector('body');
 
   const options = {
-    filename: `${initials}.pdf`,
+    filename: 'postcard.pdf',
     image: { type: 'png' },
     html2canvas: {
       useCORS: true,
       allowTaint: true,
       foreignObjectRendering: true,
-      x: 0
+      x: 0, y: 0
     },
     jsPDF: {
-      orientation: 'landscape',
+      orientation: isWebVersion ? 'landscape' : 'portrait',
     }
   };
 
@@ -79,9 +79,6 @@ const onDownload = (initials) => {
       .toPdf()
       .get('pdf')
       .then(pdf => {
-        const view = window.open(pdf.output('bloburl'), '_blank');
-        setTimeout(() => {
-          view.document.title = initials;
-        }, 100);
+        window.open(pdf.output('bloburl'), '_blank');
       });
 }
