@@ -129,8 +129,13 @@ const loadData = (templateName) => {
       ? templates[templateName]
       : JSON.parse(localStorage.getItem('data'));
 
-  validatorState['full_name'] = !templateName;
-  validatorState['title'] = !templateName;
+  if (!templateName) {
+    validatorState['full_name'] = true;
+    validatorState['title'] = true;
+
+    this.document.getElementById('full_name-error').setAttribute('style', 'display: none');
+    this.document.getElementById('title-error').setAttribute('style', 'display: none');
+  }
 
   for (const key in data) {
     this.document.getElementById(key).value = data[key] || '';
