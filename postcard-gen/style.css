@@ -15,6 +15,10 @@
 	padding: 15px;
 }
 
+.templates > label {
+	margin: 10px 0;
+}
+
 .templates > p {
 	margin: 0;
 	font-weight: bold;

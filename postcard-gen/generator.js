@@ -14,10 +14,12 @@ const buildPostcardData = (event) => {
     data[key] = formData.get(key);
   }
 
+  const year = this.document.getElementById('year').value;
+
   if (validatorState['full_name'] && validatorState['title']) {
     localStorage.setItem('data', JSON.stringify(data));
 
-    postcardForm.setAttribute('action', `./templates/${data.isWebVersion ? 'web' : 'print'}-version/template.html`);
+    postcardForm.setAttribute('action', `./templates/${year}/${data.isWebVersion ? 'web' : 'print'}-version/template.html`);
 
     postcardForm.submit();
   } else {
@@ -65,8 +67,13 @@ const fillTemplate = () => {
 
   this.document.title = `Поздравление ${ initials }`;
 
-  this.document.getElementById('last-name').textContent = lastName;
-  this.document.getElementById('name').textContent = `${ name } ${ middleName }`;
+  const nameElement = this.document.getElementById('name');
+  const lastNameElement = this.document.getElementById('last-name');
+
+  if (nameElement && lastNameElement) {
+    nameElement.textContent = `${ name } ${ middleName }`;
+    lastNameElement.textContent = lastName;
+  }
 
   for (const key in data) {
     if (['full_name', 'date', 'isWebVersion'].includes(key)) continue;
@@ -116,20 +123,33 @@ const onDownload = (isWebVersion) => {
 }
 
 const loadData = (templateName) => {
+  const year = this.document.getElementById('year').value;
+
   const templates = {
     'birthday': {
-      full_name: '',
-      title: '',
-      text_1: "Примите мои самые искренние поздравления с Днём Рождения!",
-      text_2: "От всей души желаю Вам крепкого здоровья, плодотворной работы, успехов и реализации всех планов! Пусть всегда рядом будет всесторонняя поддержка родных и близких, коллег и друзей, а накопленный жизненный опыт и оптимизм помогают Вам уверенно идти вперед!",
-      text_3: "Желаю уважения и признания в Вашей сфере деятельности, благополучия и удачи.",
-      text_4: "Пусть каждый день дарит новые силы, возможности и большие перспективы.\nБлагодарю Вас за ответственный подход к своей работе, высокий профессионализм и нацеленность на достижение результата по всем вопросам!",
-      date: new Date().toISOString().split('T')[0]
-    },
+      '2023': {
+        full_name: '',
+        title: 'Уважаем ',
+        text_1: "Примите мои самые искренние поздравления с Днём Рождения!",
+        text_2: "От всей души желаю Вам крепкого здоровья, плодотворной работы, успехов и реализации всех планов! Пусть всегда рядом будет всесторонняя поддержка родных и близких, коллег и друзей, а накопленный жизненный опыт и оптимизм помогают Вам уверенно идти вперед!",
+        text_3: "Желаю уважения и признания в Вашей сфере деятельности, благополучия и удачи.",
+        text_4: "Пусть каждый день дарит новые силы, возможности и большие перспективы.\nБлагодарю Вас за ответственный подход к своей работе, высокий профессионализм и нацеленность на достижение результата по всем вопросам!",
+        date: new Date().toISOString().split('T')[0]
+      },
+      '2024': {
+        full_name: '',
+        title: 'Уважаем ',
+        text_1: "От имени Московской областной Думы и от себя лично хочу искренне поздравить Вас с Днём Рождения!",
+        text_2: "Желаю Вам крепкого здоровья, удачи, счастья, мира и всех добрых благ. Пусть этот год принесёт Вам новые возможности, радость и успех в Вашей профессиональной и личной жизни.",
+        text_3: "Ваши преданность и силы, вложенные в работу, несомненно, способствуют развитию нашего региона. Пусть Ваша работа продолжает и дальше приносить пользу жителям Московской области.",
+        text_4: "Благодарю Вас за стремление делать наш мир лучше. Пусть Ваши яркие идеи воплощаются в жизнь, а оптимизм и неиссякаемая энергия всегда помогают уверенно двигаться вперёд!",
+        date: new Date().toISOString().split('T')[0]
+      },
+    }
   };
 
   const data = templateName
-      ? templates[templateName]
+      ? templates[templateName][year]
       : JSON.parse(localStorage.getItem('data'));
 
   toggleErrorMessage(!templateName);

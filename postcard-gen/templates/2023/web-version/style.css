@@ -1,0 +1,94 @@
+* {
+	font-family: 'Times New Roman', sans-serif;
+}
+
+body {
+	margin: 0;
+	width: max-content;
+	position: relative;
+}
+
+.page {
+	width: 297mm;
+	height: 209.75mm;
+	background-color: #EEE5D5;
+	display: flex;
+}
+
+.page > .left-side {
+	width: calc(297mm / 2);
+}
+
+.page > .left-side > img {
+	width: calc(100% - 20mm * 2);
+	margin: 40mm 20mm 0;
+}
+
+
+.page > .left-side > .full-name {
+	padding: 50mm 35mm 0;
+	text-align: center;
+}
+
+.page > .left-side > .full-name > .last-name {
+	text-transform: uppercase;
+	font-weight: bold;
+	font-size: 18pt;
+	margin: 0 0 3mm;
+}
+
+.page > .left-side > .full-name > .name {
+	font-size: 18pt;
+	width: max-content;
+	margin: auto;
+}
+
+.page > .right-side  > .congratulation {
+	width: calc(297mm / 2);
+	padding-top: 20mm;
+}
+
+.page > .right-side  > .congratulation > .title {
+	font-weight: bold;
+	font-size: 14pt;
+	text-align: center;
+	margin: auto;
+}
+
+.page > .right-side  > .congratulation > .text {
+	font-style: italic;
+	font-weight: bold;
+	font-size: 14pt;
+	margin: 8mm 5mm;
+	text-indent: 8mm;
+}
+
+.page > .right-side  > .sign {
+	position: absolute;
+	bottom: 2mm;
+	width: calc(50% - 15mm);
+	padding: 0 5mm 0;
+}
+
+.page > .right-side  > .sign > .text {
+	font-style: italic;
+	font-weight: bold;
+	font-size: 14pt;
+	text-align: end;
+}
+
+.page > .right-side  > .sign > img {
+	position: absolute;
+	top: -20mm;
+	left: 5mm;
+	width: 60mm;
+	height: 50mm;
+}
+
+.page > .right-side  > .sign > .date {
+	font-style: italic;
+	font-weight: bold;
+	font-size: 14pt;
+	text-align: start;
+	margin-top: 50px;
+}
