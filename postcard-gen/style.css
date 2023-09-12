@@ -43,6 +43,11 @@ form {
 	margin-top: 10px;
 }
 
+.input-block > label[for=isWebVersion],
+.input-block > #isWebVersion {
+	display: none;
+}
+
 #full_name-error, #title-error {
 	color: red;
 	display: none;

@@ -14,12 +14,17 @@ const buildPostcardData = (event) => {
     data[key] = formData.get(key);
   }
 
-  const year = this.document.getElementById('year').value;
+  const settings = {
+    year: this.document.getElementById('year').value,
+    format: this.document.getElementById('format').value,
+    orientation: this.document.getElementById('orientation').value,
+  };
 
   if (validatorState['full_name'] && validatorState['title']) {
     localStorage.setItem('data', JSON.stringify(data));
+    localStorage.setItem('settings', JSON.stringify(settings));
 
-    postcardForm.setAttribute('action', `./templates/${year}/${data.isWebVersion ? 'web' : 'print'}-version/template.html`);
+    postcardForm.setAttribute('action', `./templates/${settings.year}/${data.isWebVersion ? 'web' : 'print'}-version/template.html`);
 
     postcardForm.submit();
   } else {
@@ -92,8 +97,10 @@ const fillTemplate = () => {
   setTimeout(onDownload.bind(null, isWebVersion), 300);
 };
 
-const onDownload = (isWebVersion) => {
+const onDownload = () => {
   const printForm = document.querySelector('body');
+
+  const settings = JSON.parse(localStorage.getItem('settings'));
 
   const options = {
     filename: 'postcard.pdf',
@@ -105,7 +112,8 @@ const onDownload = (isWebVersion) => {
       x: 0, y: 0
     },
     jsPDF: {
-      orientation: isWebVersion ? 'landscape' : 'portrait',
+      orientation: settings.orientation,
+      format: settings.format
     }
   };
 
