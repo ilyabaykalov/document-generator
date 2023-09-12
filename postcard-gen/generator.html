@@ -4,7 +4,7 @@
 	<meta charset='UTF-8'>
 	<title>Генератор открыток</title>
 	<link rel='stylesheet' href='./style.css'>
-    <link type="Image/x-icon" href="./templates/assets/favicon.ico" rel="icon">
+    <link type="Image/x-icon" href="templates/2023/assets/favicon.ico" rel="icon">
 </head>
 <body>
     <div class="wrapper">
@@ -57,6 +57,12 @@
         </form>
         <div class="templates">
             <p>Шаблоны:</p>
+            <label for="year"> Выбери год
+                <select name="year" id="year">
+                    <option value="2023">2023 год</option>
+                    <option value="2024" selected>2024 год</option>
+                </select>
+            </label>
             <button onclick="loadData('birthday')">День рождения</button>
             <hr>
             <button onclick="loadData()">Загрузить последние данные</button>
