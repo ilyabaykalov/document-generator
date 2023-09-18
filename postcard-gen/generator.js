@@ -1,3 +1,4 @@
+window.jsPDF = window.jspdf.jsPDF;
 const validatorState = {
   'full_name': false,
   'title': false
@@ -102,33 +103,52 @@ const onDownload = () => {
 
   const settings = JSON.parse(localStorage.getItem('settings'));
 
-  const options = {
-    filename: 'postcard.pdf',
-    image: { type: 'png' },
-    html2canvas: {
-      useCORS: true,
-      allowTaint: true,
-      foreignObjectRendering: true,
-      // width: 509,
-      // height: 720,
-      x: 0, y: 0
-    },
-    jsPDF: {
-      orientation: settings.orientation,
-      format: settings.format,
-      unit: 'pt'
-    }
-  };
+  // const options = {
+  //   filename: 'postcard.pdf',
+  //   image: { type: 'png' },
+  //   html2canvas: {
+  //     useCORS: true,
+  //     allowTaint: true,
+  //     foreignObjectRendering: true,
+  //     // width: 509,
+  //     // height: 720,
+  //     x: 0, y: 0
+  //   },
+  //   jsPDF: {
+  //     orientation: settings.orientation,
+  //     format: settings.format,
+  //     unit: 'pt'
+  //   }
+  // };
+  //
+  // const pdf = html2pdf()
+  //     .set(options)
+  //     .from(printForm)
+  //     .toPdf()
+  //     .get('pdf');
+  //
+  // if (/Android|iPhone/i.test(navigator.userAgent)){
+  //   pdf.then(pdf => {
+  //     window.open(pdf.output('bloburl'), '_blank');
+  //   });
+  // } else window.print();
+  // window.scrollTo(0, 0); // <-- this fixes the issue
 
-  const pdf = html2pdf()
-      .set(options)
-      .from(printForm)
-      .toPdf()
-      .get('pdf');
+  if (/Android|iPhone/i.test(navigator.userAgent)) {
+    html2canvas(printForm, {
+      windowWidth: '148mm',
+      windowHeight: '209.75mm',
+      scale: 1,
+    }).then((canvas) => {
+      const imgData = canvas.toDataURL('image/jpeg');
+      const pdf = new jsPDF({
+        orientation: settings.orientation,
+        format: settings.format,
+        unit: 'pt',
+      });
 
-  if (/Android|iPhone/i.test(navigator.userAgent)){
-    pdf.then(pdf => {
-      window.open(pdf.output('bloburl'), '_blank');
+      pdf.addImage(imgData, 'JPEG', 0, 0);
+      pdf.save('download.pdf');
     });
   } else window.print();
 }
