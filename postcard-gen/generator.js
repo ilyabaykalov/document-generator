@@ -138,7 +138,7 @@ const onDownload = () => {
     html2canvas(printForm, {
       windowWidth: '148mm',
       windowHeight: '209.75mm',
-      scale: 1,
+      scale: 4,
     }).then((canvas) => {
       const imgData = canvas.toDataURL('image/jpeg');
       // const pdf = new jsPDF({
