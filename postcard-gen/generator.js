@@ -111,7 +111,7 @@ const onDownload = () => {
       foreignObjectRendering: true,
       // width: 509,
       // height: 720,
-      x: 50, y: 0
+      x: 60, y: 0
     },
     jsPDF: {
       orientation: settings.orientation,
