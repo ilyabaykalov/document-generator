@@ -141,14 +141,18 @@ const onDownload = () => {
       scale: 1,
     }).then((canvas) => {
       const imgData = canvas.toDataURL('image/jpeg');
-      const pdf = new jsPDF({
-        orientation: settings.orientation,
-        format: settings.format,
-        unit: 'pt',
-      });
-
-      pdf.addImage(imgData, 'JPEG', 0, 0);
-      pdf.save('download.pdf');
+      // const pdf = new jsPDF({
+      //   orientation: settings.orientation,
+      //   format: settings.format,
+      //   unit: 'pt',
+      // });
+      //
+      // pdf.addImage(imgData, 'JPEG', 0, 0);
+      // pdf.save('download.pdf');
+      const link = document.createElement('a');
+      link.href = canvas.toDataURL('image/jpeg');
+      link.download = 'file.jpg';
+      link.click();
     });
   } else window.print();
 }
