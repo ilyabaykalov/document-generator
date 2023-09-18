@@ -109,7 +109,7 @@ const onDownload = () => {
       useCORS: true,
       allowTaint: true,
       foreignObjectRendering: true,
-      x: 55, y: 0
+      x: 53, y: 0
     },
     jsPDF: {
       orientation: settings.orientation,
