@@ -112,14 +112,14 @@ const onDownload = () => {
       x: 0, y: 0
     },
     jsPDF: {
-      // orientation: settings.orientation,
-      format: settings.format
+      orientation: 'landscape', //settings.orientation,
+      format: 'a5'//settings.format
     }
   };
 
   const pdf = html2pdf()
-      .from(printForm)
       .set(options)
+      .from(printForm)
       .toPdf()
       .get('pdf');
 
