@@ -100,12 +100,11 @@ const onDownload = (filename = 'postcard') => {
     windowHeight: printForm.offsetHeight,
     useCORS: true,
     allowTaint: true,
-    foreignObjectRendering: true,
     scale: 4,
     x: 0, y: 0
   }).then((canvas) => {
     const link = document.createElement('a');
-    link.href = canvas.toDataURL('image/png');
+    link.href = canvas.toDataURL('image/jpg');
     link.download = `${filename}png`;
 
     link.click();
