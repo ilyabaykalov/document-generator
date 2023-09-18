@@ -112,8 +112,8 @@ const onDownload = () => {
       x: 0, y: 0
     },
     jsPDF: {
-      orientation: 'landscape', //settings.orientation,
-      format: 'a5'//settings.format
+      orientation: settings.orientation,
+      format: settings.format
     }
   };
 
