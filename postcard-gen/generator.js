@@ -1,4 +1,4 @@
-window.jsPDF = window.jspdf.jsPDF;
+// window.jsPDF = window.jspdf.jsPDF;
 const validatorState = {
   'full_name': false,
   'title': false
