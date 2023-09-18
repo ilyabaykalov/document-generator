@@ -11,8 +11,6 @@ body {
 .page {
 	width: 148mm;
 	height: 209.75mm;
-	/*width: 419.53pt;*/
-	/*height: 594.5pt;*/
 	background: linear-gradient(180deg, rgba(142,180,202,1) 0%, rgba(255,255,255,0.8) 100%);
 	display: flex;
 }

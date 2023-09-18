@@ -1,4 +1,3 @@
-// window.jsPDF = window.jspdf.jsPDF;
 const validatorState = {
   'full_name': false,
   'title': false
@@ -15,17 +14,12 @@ const buildPostcardData = (event) => {
     data[key] = formData.get(key);
   }
 
-  const settings = {
-    year: this.document.getElementById('year').value,
-    format: this.document.getElementById('format').value,
-    orientation: this.document.getElementById('orientation').value,
-  };
-
   if (validatorState['full_name'] && validatorState['title']) {
     localStorage.setItem('data', JSON.stringify(data));
-    localStorage.setItem('settings', JSON.stringify(settings));
 
-    postcardForm.setAttribute('action', `./templates/${settings.year}/${data.isWebVersion ? 'web' : 'print'}-version/template.html`);
+    const year = this.document.getElementById('year').value
+
+    postcardForm.setAttribute('action', `./templates/${year}/${data.isWebVersion ? 'web' : 'print'}-version/template.html`);
 
     postcardForm.submit();
   } else {
@@ -64,97 +58,58 @@ const validateTitle = ({target}) => {
 }
 
 const fillTemplate = () => {
-  // const data = JSON.parse(localStorage.getItem('data'));
-  //
-  // const { full_name, date, isWebVersion } = data;
-  //
-  // const [lastName, name, middleName] = full_name.split(' ');
-  // const initials = `${ lastName } ${ name[0] }.${ middleName[0] }.`
-  //
-  // this.document.title = `Поздравление ${ initials }`;
-  //
-  // const nameElement = this.document.getElementById('name');
-  // const lastNameElement = this.document.getElementById('last-name');
-  //
-  // if (nameElement && lastNameElement) {
-  //   nameElement.textContent = `${ name } ${ middleName }`;
-  //   lastNameElement.textContent = lastName;
-  // }
-  //
-  // for (const key in data) {
-  //   if (['full_name', 'date', 'isWebVersion'].includes(key)) continue;
-  //
-  //   this.document.getElementById(key).textContent = data[key];
-  // }
-  //
-  // const formattedDate = new Date(date)
-  //   .toLocaleDateString('ru-RU', {
-  //     day: 'numeric', month: 'long', year: 'numeric',
-  //   })
-  //   .slice(0, -3);
-  //
-  // this.document.getElementById('date').textContent = `г. Москва, ${ formattedDate } года`;
+  const data = JSON.parse(localStorage.getItem('data'));
 
-  setTimeout(onDownload, 300);
+  const { full_name, date } = data;
+
+  const [lastName, name, middleName] = full_name.split(' ');
+  const initials = `${ lastName } ${ name[0] }.${ middleName[0] }.`
+
+  this.document.title = `Поздравление ${ initials }`;
+
+  const nameElement = this.document.getElementById('name');
+  const lastNameElement = this.document.getElementById('last-name');
+
+  if (nameElement && lastNameElement) {
+    nameElement.textContent = `${ name } ${ middleName }`;
+    lastNameElement.textContent = lastName;
+  }
+
+  for (const key in data) {
+    if (['full_name', 'date', 'isWebVersion'].includes(key)) continue;
+
+    this.document.getElementById(key).textContent = data[key];
+  }
+
+  const formattedDate = new Date(date)
+    .toLocaleDateString('ru-RU', {
+      day: 'numeric', month: 'long', year: 'numeric',
+    })
+    .slice(0, -3);
+
+  this.document.getElementById('date').textContent = `г. Москва, ${ formattedDate } года`;
+
+  setTimeout(onDownload.bind(null, initials), 300);
 };
 
-const onDownload = () => {
-  const printForm = document.querySelector('body');
+const onDownload = (filename = 'postcard') => {
+  const printForm = document.querySelector('.page');
 
-  const settings = JSON.parse(localStorage.getItem('settings'));
+  html2canvas(printForm, {
+    windowWidth: printForm.offsetWidth,
+    windowHeight: printForm.offsetHeight,
+    useCORS: true,
+    allowTaint: true,
+    foreignObjectRendering: true,
+    scale: 4,
+    x: 0, y: 0
+  }).then((canvas) => {
+    const link = document.createElement('a');
+    link.href = canvas.toDataURL('image/png');
+    link.download = `${filename}png`;
 
-  // const options = {
-  //   filename: 'postcard.pdf',
-  //   image: { type: 'png' },
-  //   html2canvas: {
-  //     useCORS: true,
-  //     allowTaint: true,
-  //     foreignObjectRendering: true,
-  //     // width: 509,
-  //     // height: 720,
-  //     x: 0, y: 0
-  //   },
-  //   jsPDF: {
-  //     orientation: settings.orientation,
-  //     format: settings.format,
-  //     unit: 'pt'
-  //   }
-  // };
-  //
-  // const pdf = html2pdf()
-  //     .set(options)
-  //     .from(printForm)
-  //     .toPdf()
-  //     .get('pdf');
-  //
-  // if (/Android|iPhone/i.test(navigator.userAgent)){
-  //   pdf.then(pdf => {
-  //     window.open(pdf.output('bloburl'), '_blank');
-  //   });
-  // } else window.print();
-  // window.scrollTo(0, 0); // <-- this fixes the issue
-
-  if (/Android|iPhone/i.test(navigator.userAgent)) {
-    html2canvas(printForm, {
-      windowWidth: '148mm',
-      windowHeight: '209.75mm',
-      scale: 4,
-    }).then((canvas) => {
-      const imgData = canvas.toDataURL('image/jpeg');
-      // const pdf = new jsPDF({
-      //   orientation: settings.orientation,
-      //   format: settings.format,
-      //   unit: 'pt',
-      // });
-      //
-      // pdf.addImage(imgData, 'JPEG', 0, 0);
-      // pdf.save('download.pdf');
-      const link = document.createElement('a');
-      link.href = canvas.toDataURL('image/jpeg');
-      link.download = 'file.jpg';
-      link.click();
-    });
-  } else window.print();
+    link.click();
+  });
 }
 
 const loadData = (templateName) => {
