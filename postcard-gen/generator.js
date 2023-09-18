@@ -92,7 +92,7 @@ const fillTemplate = () => {
   setTimeout(onDownload.bind(null, initials), 300);
 };
 
-const onDownload = (filename = 'postcard.png') => {
+const onDownload = (filename) => {
   const printForm = document.querySelector('.page');
 
   html2canvas(printForm, {
@@ -105,7 +105,7 @@ const onDownload = (filename = 'postcard.png') => {
   }).then((canvas) => {
     const link = document.createElement('a');
     link.href = canvas.toDataURL('image/jpg');
-    link.download = filename || `${filename}png`;
+    link.download = `${filename}png`;
 
     link.click();
   });
