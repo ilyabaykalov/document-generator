@@ -63,38 +63,38 @@ const validateTitle = ({target}) => {
 }
 
 const fillTemplate = () => {
-  const data = JSON.parse(localStorage.getItem('data'));
+  // const data = JSON.parse(localStorage.getItem('data'));
+  //
+  // const { full_name, date, isWebVersion } = data;
+  //
+  // const [lastName, name, middleName] = full_name.split(' ');
+  // const initials = `${ lastName } ${ name[0] }.${ middleName[0] }.`
+  //
+  // this.document.title = `Поздравление ${ initials }`;
+  //
+  // const nameElement = this.document.getElementById('name');
+  // const lastNameElement = this.document.getElementById('last-name');
+  //
+  // if (nameElement && lastNameElement) {
+  //   nameElement.textContent = `${ name } ${ middleName }`;
+  //   lastNameElement.textContent = lastName;
+  // }
+  //
+  // for (const key in data) {
+  //   if (['full_name', 'date', 'isWebVersion'].includes(key)) continue;
+  //
+  //   this.document.getElementById(key).textContent = data[key];
+  // }
+  //
+  // const formattedDate = new Date(date)
+  //   .toLocaleDateString('ru-RU', {
+  //     day: 'numeric', month: 'long', year: 'numeric',
+  //   })
+  //   .slice(0, -3);
+  //
+  // this.document.getElementById('date').textContent = `г. Москва, ${ formattedDate } года`;
 
-  const { full_name, date, isWebVersion } = data;
-
-  const [lastName, name, middleName] = full_name.split(' ');
-  const initials = `${ lastName } ${ name[0] }.${ middleName[0] }.`
-
-  this.document.title = `Поздравление ${ initials }`;
-
-  const nameElement = this.document.getElementById('name');
-  const lastNameElement = this.document.getElementById('last-name');
-
-  if (nameElement && lastNameElement) {
-    nameElement.textContent = `${ name } ${ middleName }`;
-    lastNameElement.textContent = lastName;
-  }
-
-  for (const key in data) {
-    if (['full_name', 'date', 'isWebVersion'].includes(key)) continue;
-
-    this.document.getElementById(key).textContent = data[key];
-  }
-
-  const formattedDate = new Date(date)
-    .toLocaleDateString('ru-RU', {
-      day: 'numeric', month: 'long', year: 'numeric',
-    })
-    .slice(0, -3);
-
-  this.document.getElementById('date').textContent = `г. Москва, ${ formattedDate } года`;
-
-  setTimeout(onDownload.bind(null, isWebVersion), 300);
+  setTimeout(onDownload, 300);
 };
 
 const onDownload = () => {
