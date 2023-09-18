@@ -113,7 +113,8 @@ const onDownload = () => {
     },
     jsPDF: {
       orientation: settings.orientation,
-      format: settings.format
+      format: settings.format,
+      unit: 'pt'
     }
   };
 
