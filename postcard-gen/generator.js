@@ -14,17 +14,12 @@ const buildPostcardData = (event) => {
     data[key] = formData.get(key);
   }
 
-  const settings = {
-    year: this.document.getElementById('year').value,
-    format: this.document.getElementById('format').value,
-    orientation: this.document.getElementById('orientation').value,
-  };
-
   if (validatorState['full_name'] && validatorState['title']) {
     localStorage.setItem('data', JSON.stringify(data));
-    localStorage.setItem('settings', JSON.stringify(settings));
 
-    postcardForm.setAttribute('action', `./templates/${settings.year}/${data.isWebVersion ? 'web' : 'print'}-version/template.html`);
+    const year = this.document.getElementById('year').value
+
+    postcardForm.setAttribute('action', `./templates/${year}/${data.isWebVersion ? 'web' : 'print'}-version/template.html`);
 
     postcardForm.submit();
   } else {
@@ -65,7 +60,7 @@ const validateTitle = ({target}) => {
 const fillTemplate = () => {
   const data = JSON.parse(localStorage.getItem('data'));
 
-  const { full_name, date, isWebVersion } = data;
+  const { full_name, date } = data;
 
   const [lastName, name, middleName] = full_name.split(' ');
   const initials = `${ lastName } ${ name[0] }.${ middleName[0] }.`
@@ -94,40 +89,26 @@ const fillTemplate = () => {
 
   this.document.getElementById('date').textContent = `г. Москва, ${ formattedDate } года`;
 
-  setTimeout(onDownload.bind(null, isWebVersion), 300);
+  setTimeout(onDownload.bind(null, initials), 300);
 };
 
-const onDownload = () => {
-  const printForm = document.querySelector('body');
+const onDownload = (filename) => {
+  const printForm = document.querySelector('.page');
 
-  const settings = JSON.parse(localStorage.getItem('settings'));
+  html2canvas(printForm, {
+    windowWidth: printForm.offsetWidth,
+    windowHeight: printForm.offsetHeight,
+    useCORS: true,
+    allowTaint: true,
+    scale: 4,
+    x: 0, y: 0
+  }).then((canvas) => {
+    const link = document.createElement('a');
+    link.href = canvas.toDataURL('image/jpg');
+    link.download = `${filename}png`;
 
-  const options = {
-    filename: 'postcard.pdf',
-    image: { type: 'png' },
-    html2canvas: {
-      useCORS: true,
-      allowTaint: true,
-      foreignObjectRendering: true,
-      x: -30, y: 0
-    },
-    jsPDF: {
-      orientation: settings.orientation,
-      format: settings.format
-    }
-  };
-
-  const pdf = html2pdf()
-      .from(printForm)
-      .set(options)
-      .toPdf()
-      .get('pdf');
-
-  if (/Android|iPhone/i.test(navigator.userAgent)){
-    pdf.then(pdf => {
-      window.open(pdf.output('bloburl'), '_blank');
-    });
-  } else window.print();
+    link.click();
+  });
 }
 
 const loadData = (templateName) => {
