@@ -1,0 +1,28 @@
+### IntelliJ IDEA ###
+.idea
+*.iml
+
+### dependencies ###
+/node_modules
+package-lock.json
+
+### build ###
+/dist
+
+### scss declarations ###
+/src/**/*.scss.d.ts
+
+
+### testing ###
+/coverage
+
+### enviroment variables ###
+.env
+
+### misc ###
+.DS_Store
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+debug.log
