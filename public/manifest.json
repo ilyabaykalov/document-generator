@@ -1,6 +1,6 @@
 {
-  "short_name": "react-template",
-  "name": "react-template",
+  "short_name": "document-generator",
+  "name": "document-generator",
   "icons": [
     {
       "src": "favicon.ico",

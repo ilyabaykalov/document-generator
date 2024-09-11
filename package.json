@@ -1,5 +1,5 @@
 {
-  "name": "react-template",
+  "name": "document-generator",
   "version": "1.0.0",
   "type": "module",
   "author": {
@@ -11,11 +11,18 @@
     "build": "webpack --mode production"
   },
   "dependencies": {
+    "@date-io/date-fns": "^3.0.0",
+    "@emotion/react": "^11.13.3",
+    "@emotion/styled": "^11.13.0",
+    "@mui/material": "^6.0.2",
+    "@mui/x-date-pickers": "^7.16.0",
+    "moment": "^2.30.1",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "react-router-dom": "^6.26.2"
   },
   "devDependencies": {
+    "@reduxjs/toolkit": "^2.2.7",
     "@types/react-dom": "^18.3.0",
     "@typescript-eslint/eslint-plugin": "^8.5.0",
     "@typescript-eslint/parser": "^8.5.0",
@@ -28,6 +35,7 @@
     "eslint-plugin-import": "^2.30.0",
     "eslint-plugin-react": "^7.35.2",
     "html-webpack-plugin": "^5.6.0",
+    "react-redux": "^9.1.2",
     "sass": "^1.78.0",
     "sass-loader": "^16.0.1",
     "style-loader": "^4.0.0",
