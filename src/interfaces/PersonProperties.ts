@@ -4,6 +4,7 @@ export interface PersonProperties {
 	lastName: string;
 	middleName: string;
 	birthday: Date;
+	gender: 'man' | 'woman';
 }
 
 export interface PersonsProperties {

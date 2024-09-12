@@ -9,25 +9,29 @@ const initialState: PersonsProperties = {
 		firstName: 'Василий',
 		lastName: 'Габов',
 		middleName: 'Петрович',
-		birthday: moment('1975-09-11').toDate(),
+		birthday: moment('1975-09-14').toDate(),
+		gender: 'man'
 	}, {
 		id: '2',
 		firstName: 'Петр',
 		lastName: 'Малинин',
 		middleName: 'Геннадьевич',
-		birthday: moment('1975-09-10').toDate(),
+		birthday: moment('1975-09-13').toDate(),
+		gender: 'man'
 	}, {
 		id: '3',
 		firstName: 'Елена',
 		lastName: 'Ковенкова',
 		middleName: 'Павловна',
 		birthday: moment('1975-09-12').toDate(),
+		gender: 'woman'
 	}, {
 		id: '4',
 		firstName: 'Андрей',
 		lastName: 'Юсупов',
 		middleName: 'Петрович',
-		birthday: moment('1975-09-11').toDate(),
+		birthday: moment('1975-09-13').toDate(),
+		gender: 'man'
 	} ],
 };
 

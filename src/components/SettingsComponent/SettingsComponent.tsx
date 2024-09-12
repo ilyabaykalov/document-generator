@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 
 import {
-	Button, FormControl, InputLabel,
+	FormControl, InputLabel,
 	OutlinedInput, SelectChangeEvent, ToggleButton,
 	ToggleButtonGroup, Select, MenuItem,
 } from '@mui/material';
@@ -17,7 +17,7 @@ import { PersonProperties, State } from '@interfaces';
 
 import { useDispatch, useSelector } from '@hooks';
 
-import { setOrientation, setPerson, setPostcardFormat } from '@store/SettingsSlice';
+import { setOrientation, setPerson, setPostcardFormat, setSelectedDate } from '@store/SettingsSlice';
 
 import styles from './SettingsComponent.module.scss';
 
@@ -25,7 +25,7 @@ const SettingsComponent = () => {
 	const dispatch = useDispatch();
 
 	const [ selectedPersonId, setSelectedPersonId ] = useState<string>('0');
-	const [ selectedDate, setSelectedDate ] = useState<PickerValidDate>(null);
+	const [ selectedDate, setSelectedPickerDate ] = useState<PickerValidDate>(null);
 
 	const persons: PersonProperties[] = useSelector((state: State) => state.personsState.persons);
 
@@ -34,27 +34,30 @@ const SettingsComponent = () => {
 			moment(selectedDate).dayOfYear() === moment(birthday).dayOfYear() + 1),
 	);
 
-	const selectedPerson: PersonProperties = useSelector(({ settingsState }: State) => settingsState.person);
 	const postcardFormat: string = useSelector(({ settingsState }: State) => settingsState.postcardFormat);
 	const orientation: string = useSelector(({ settingsState }: State) => settingsState.orientation);
+
+	const resetSelectedPersonId = () => {
+		if (selectedPersonId !== '0') {
+			setSelectedPersonId('0');
+			dispatch(setPerson({ person: null }));
+		}
+	};
 
 	useEffect(() => {
 		const date = moment().startOf('day');
 
-		setSelectedDate(date as PickerValidDate);
+		setSelectedPickerDate(date as PickerValidDate);
 	}, []);
-
-	useEffect(() => {
-		if (!personsByBirthday.length && selectedPersonId !== '0') {
-			setSelectedPersonId('0');
-			dispatch(setPerson({ person: null }));
-		}
-	}, [ personsByBirthday ]);
 
 	const onDateChangeHandler = (pickerDate: PickerValidDate) => {
 		const date = moment(pickerDate).startOf('day');
 
-		setSelectedDate(date as PickerValidDate);
+		setSelectedPickerDate(date as PickerValidDate);
+
+		dispatch(setSelectedDate({ selectedDate: date }));
+
+		resetSelectedPersonId();
 	};
 
 	const onPersonChangeHandler = ({ target }: SelectChangeEvent) => {
@@ -70,15 +73,6 @@ const SettingsComponent = () => {
 
 	const onOrientationChangeHandler = (event: React.MouseEvent<HTMLElement>, orientation: string) =>
 		dispatch(setOrientation({ orientation }));
-
-	const onSubmitHandler = () => {
-		console.log({
-			person: selectedPerson,
-			postcardFormat,
-			orientation,
-			selectedDate: moment(selectedDate).toDate(),
-		});
-	};
 
 	return (
 		<FormControl className={ styles.settingsForm }>
@@ -114,7 +108,7 @@ const SettingsComponent = () => {
 				color="primary"
 				className={ styles.toggleGroup }
 				value={ orientation }
-				exclusive fullWidth
+				exclusive fullWidth disabled
 				onChange={ onOrientationChangeHandler }
 				aria-label="Platform">
 				<ToggleButton value="portrait">Портретная</ToggleButton>
@@ -128,8 +122,6 @@ const SettingsComponent = () => {
 					slotProps={ { actionBar: { actions: [] } }
 					}/>
 			</LocalizationProvider>
-
-			<Button variant="outlined" type={ 'submit' } onClick={ onSubmitHandler }>Создать</Button>
 		</FormControl>
 	);
 };
