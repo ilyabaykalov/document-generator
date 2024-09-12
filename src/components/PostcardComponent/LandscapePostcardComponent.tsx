@@ -16,6 +16,16 @@ const LandscapePostcardComponent = () => {
 	const text: string[] = useSelector(({ postcardState }: State) =>
 		postcardFormat === 'official' ? postcardState.officialText : postcardState.unofficialText);
 
+	const isAnniversary: boolean = useSelector(({ settingsState }: State) => {
+		if (settingsState.person) {
+			const dateDifference = moment(settingsState.selectedDate).year() - moment(settingsState.person.birthday).year();
+
+			return dateDifference % 10 === 0;
+		}
+
+		return false
+	});
+
 	return (
 		<div id={ 'postcard' } className={ styles.postcard }>
 			<img className={ styles.background } src={ 'assets/backgrounds/landscape-1.png' } alt="background"/>
@@ -31,7 +41,7 @@ const LandscapePostcardComponent = () => {
 				}
 
 				<div className={ styles.text }>
-					{ text.map((paragraph, index) => <p key={index}>{paragraph}</p>) }
+					{ text.map((paragraph, index) => <p key={index}>{paragraph}{ index === 0 ? isAnniversary ? 'с юбилеем!' : 'с Днём Рождения!' : '' }</p>) }
 				</div>
 
 				<div className={ styles.footer }>

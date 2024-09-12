@@ -9,7 +9,7 @@ const initialState: PersonsProperties = {
 		firstName: 'Василий',
 		lastName: 'Габов',
 		middleName: 'Петрович',
-		birthday: moment('1975-09-14').toDate(),
+		birthday: moment('1974-09-14').toDate(),
 		gender: 'man'
 	}, {
 		id: '2',
