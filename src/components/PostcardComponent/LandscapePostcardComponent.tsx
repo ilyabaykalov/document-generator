@@ -29,7 +29,7 @@ const LandscapePostcardComponent = () => {
 	return (
 		<div id={ 'postcard' } className={ styles.postcard }>
 			<img className={ styles.background } src={ 'assets/backgrounds/landscape-1.png' } alt="background"/>
-			<img className={ styles.blazon } src={ 'assets/blazon.svg' } alt="blazon"/>
+			<img className={ styles.blazon } src={ 'assets/blazon.png' } alt="blazon"/>
 
 			<div className={ styles.textContainer }>
 
