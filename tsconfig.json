@@ -22,7 +22,8 @@
          "@reducers": ["src/store/reducers"],
          "@hooks": ["src/hooks"],
          "@utils": ["src/utils"],
-         "@stylesheets": ["src/stylesheets"]
+         "@stylesheets": ["src/stylesheets"],
+         "@assets/*": ["public/assets/*"]
       }
    },
 }

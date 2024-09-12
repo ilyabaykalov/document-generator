@@ -27,7 +27,7 @@ const webpackSettings = (_, argv) => {
 			historyApiFallback: true,
 		},
 		resolve: {
-			extensions: [ '.ts', '.tsx', '.js', '.jsx', '.scss', '.css' ],
+			extensions: [ '.ts', '.tsx', '.js', '.jsx', '.scss', '.css', '.png' ],
 			alias: {
 				'@pages': resolve('src/pages'),
 				'@components': resolve('src/components'),
@@ -40,6 +40,7 @@ const webpackSettings = (_, argv) => {
 				'@hooks': resolve('src/hooks'),
 				'@utils': resolve('src/utils'),
 				'@stylesheets': resolve('src/stylesheets'),
+				'@assets/*': resolve('public/assets/*'),
 			},
 		},
 		plugins: [
@@ -60,8 +61,7 @@ const webpackSettings = (_, argv) => {
 					test: /\.tsx?$/,
 					use: 'ts-loader',
 					exclude: /node_modules/,
-				},
-				{
+				}, {
 					test: /\.s[ac]ss$/i,
 					use: [
 						'style-loader',
@@ -74,7 +74,21 @@ const webpackSettings = (_, argv) => {
 						},
 						'sass-loader',
 					],
-				},
+				}, {
+					test: /\.(png|jpe?g|gif)$/i,
+					use: [
+						{
+							loader: 'file-loader',
+						},
+					],
+				}, {
+					test: /\.(eot|svg|otf|ttf|woff|woff2)$/,
+					use: [
+						{
+							loader: 'file-loader?name=./assets/fonts/FlowExt/[name].[ext]'
+						},
+					]
+				}
 			],
 		},
 	};

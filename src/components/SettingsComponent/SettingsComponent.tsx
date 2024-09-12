@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react';
 import {
 	Button, FormControl, InputLabel,
 	OutlinedInput, SelectChangeEvent, ToggleButton,
-	ToggleButtonGroup, Select, MenuItem
+	ToggleButtonGroup, Select, MenuItem,
 } from '@mui/material';
 
 import moment from 'moment/moment';
@@ -31,7 +31,7 @@ const SettingsComponent = () => {
 
 	const personsByBirthday: PersonProperties[] = useSelector((state: State) =>
 		state.personsState.persons.filter(({ birthday }) =>
-				moment(selectedDate).dayOfYear() === moment(birthday).dayOfYear() + 1)
+			moment(selectedDate).dayOfYear() === moment(birthday).dayOfYear() + 1),
 	);
 
 	const selectedPerson: PersonProperties = useSelector(({ settingsState }: State) => settingsState.person);
@@ -39,7 +39,7 @@ const SettingsComponent = () => {
 	const orientation: string = useSelector(({ settingsState }: State) => settingsState.orientation);
 
 	useEffect(() => {
-		const date = moment().startOf('day')
+		const date = moment().startOf('day');
 
 		setSelectedDate(date as PickerValidDate);
 	}, []);
@@ -49,10 +49,10 @@ const SettingsComponent = () => {
 			setSelectedPersonId('0');
 			dispatch(setPerson({ person: null }));
 		}
-	}, [personsByBirthday]);
+	}, [ personsByBirthday ]);
 
 	const onDateChangeHandler = (pickerDate: PickerValidDate) => {
-		const date = moment(pickerDate).startOf('day')
+		const date = moment(pickerDate).startOf('day');
 
 		setSelectedDate(date as PickerValidDate);
 	};
@@ -78,61 +78,59 @@ const SettingsComponent = () => {
 			orientation,
 			selectedDate: moment(selectedDate).toDate(),
 		});
-	}
+	};
 
 	return (
-		<>
-			<FormControl className={ styles.settingsForm }>
-				<InputLabel id={ 'full-name-label' }>Кого поздравляем?</InputLabel>
-				<Select labelId={ 'full-name-label' } required
-				        input={ <OutlinedInput label="Кого поздравляем?"/> }
-				        value={selectedPersonId}
-				        onChange={ onPersonChangeHandler }>
-					<MenuItem key={ 0 } value={ 0 }>
-						Не выбрано значение
-					</MenuItem>
-					{
-						personsByBirthday.map((person) =>
-							<MenuItem key={ person.id } value={ person.id }>
-								{ person.lastName } { person.firstName } { person.middleName }
-							</MenuItem>,
-						)
-					}
-				</Select>
+		<FormControl className={ styles.settingsForm }>
+			<InputLabel id={ 'full-name-label' }>Кого поздравляем?</InputLabel>
+			<Select labelId={ 'full-name-label' } required
+			        input={ <OutlinedInput label="Кого поздравляем?"/> }
+			        value={ selectedPersonId }
+			        onChange={ onPersonChangeHandler }>
+				<MenuItem key={ 0 } value={ 0 }>
+					Не выбрано значение
+				</MenuItem>
+				{
+					personsByBirthday.map((person) =>
+						<MenuItem key={ person.id } value={ person.id }>
+							{ person.lastName } { person.firstName } { person.middleName }
+						</MenuItem>,
+					)
+				}
+			</Select>
 
-				<ToggleButtonGroup
-					color="primary"
-					className={ styles.toggleGroup }
-					value={ postcardFormat }
-					exclusive fullWidth
-					onChange={ onPostcardFormatChangeHandler }
-					aria-label="Platform">
-					<ToggleButton value="official">Официально</ToggleButton>
-					<ToggleButton value="unofficial">Как друзей</ToggleButton>
-				</ToggleButtonGroup>
+			<ToggleButtonGroup
+				color="primary"
+				className={ styles.toggleGroup }
+				value={ postcardFormat }
+				exclusive fullWidth
+				onChange={ onPostcardFormatChangeHandler }
+				aria-label="Platform">
+				<ToggleButton value="official">Официально</ToggleButton>
+				<ToggleButton value="unofficial">Как друзей</ToggleButton>
+			</ToggleButtonGroup>
 
-				<ToggleButtonGroup
-					color="primary"
-					className={ styles.toggleGroup }
-					value={ orientation }
-					exclusive fullWidth
-					onChange={ onOrientationChangeHandler }
-					aria-label="Platform">
-					<ToggleButton value="portrait">Портретная</ToggleButton>
-					<ToggleButton value="landscape">Альбомная</ToggleButton>
-				</ToggleButtonGroup>
+			<ToggleButtonGroup
+				color="primary"
+				className={ styles.toggleGroup }
+				value={ orientation }
+				exclusive fullWidth
+				onChange={ onOrientationChangeHandler }
+				aria-label="Platform">
+				<ToggleButton value="portrait">Портретная</ToggleButton>
+				<ToggleButton value="landscape">Альбомная</ToggleButton>
+			</ToggleButtonGroup>
 
-				<LocalizationProvider dateAdapter={ AdapterMoment } adapterLocale={ 'ru-RU' }>
-					<StaticDatePicker
-						value={ selectedDate } disablePast
-						onChange={ onDateChangeHandler }
-						slotProps={ { actionBar: { actions: [] } }
-						}/>
-				</LocalizationProvider>
+			<LocalizationProvider dateAdapter={ AdapterMoment } adapterLocale={ 'ru-RU' }>
+				<StaticDatePicker
+					value={ selectedDate } disablePast
+					onChange={ onDateChangeHandler }
+					slotProps={ { actionBar: { actions: [] } }
+					}/>
+			</LocalizationProvider>
 
-				<Button variant="outlined" type={ 'submit' } onClick={onSubmitHandler}>Создать</Button>
-			</FormControl>
-		</>
+			<Button variant="outlined" type={ 'submit' } onClick={ onSubmitHandler }>Создать</Button>
+		</FormControl>
 	);
 };
 

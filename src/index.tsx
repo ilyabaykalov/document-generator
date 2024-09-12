@@ -8,6 +8,8 @@ import store from '@store';
 import { RouterProvider } from 'react-router-dom';
 import { BrowserRouter } from '@router';
 
+import '@stylesheets';
+
 const rootContainer = document.getElementById('root');
 const root = createRoot(rootContainer);
 

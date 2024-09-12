@@ -1,0 +1,165 @@
+.postcard {
+  position: relative;
+  width: 21cm;
+  height: 14.8cm;
+
+  .background {
+    height: 100%;
+  }
+
+  .blazon {
+    position: absolute;
+    top: 30px;
+    left: 20px;
+    width: 180px;
+  }
+
+  .textContainer {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    padding: 120px 0;
+    text-align: center;
+
+    .header {
+      font-size: 20pt;
+      font-weight: bold;
+      font-style: italic;
+    }
+
+    .text {
+      margin: 30px 80px 20px;
+      text-align: center;
+      font-size: 12pt;
+      font-style: italic;
+
+      p {
+        margin-top: 10px;
+      }
+    }
+
+    .footer {
+      display: flex;
+      justify-content: space-between;
+      position: absolute;
+      bottom: 40px;
+      padding: 0 50px;
+      align-items: center;
+      font-weight: bold;
+      font-style: italic;
+
+      &Left {
+        width: 55%;
+
+        &Text {
+          font-size: 12pt;
+          text-align: left;
+        }
+      }
+
+      .sign {
+        height: 100px;
+      }
+
+      &Right {
+        align-self: end;
+        //margin-bottom: 10px;
+
+        .fullName {
+          font-size: 14pt;
+          text-align: right;
+        }
+
+        .date {
+          font-size: 12pt;
+          text-align: right;
+          margin-top: 10px;
+        }
+      }
+    }
+  }
+}
+
+// Старый вариант
+//.postcard {
+//  position: relative;
+//  height: 100%;
+//
+//  .background {
+//    height: 100%;
+//  }
+//
+//  .blazon {
+//    position: absolute;
+//    top: 50px;
+//    left: 50px;
+//    width: 250px;
+//  }
+//
+//  .textContainer {
+//    position: absolute;
+//    top: 0;
+//    left: 0;
+//    width: 100%;
+//    height: 100%;
+//    margin-top: 200px;
+//    text-align: center;
+//
+//    .header {
+//      font-size: 24pt;
+//      font-weight: bold;
+//      font-style: italic;
+//    }
+//
+//    .text {
+//      margin: 20px 150px;
+//      text-align: center;
+//      font-size: 18pt;
+//      font-style: italic;
+//
+//      p {
+//        margin-top: 30px;
+//      }
+//    }
+//
+//    .footer {
+//      display: flex;
+//      justify-content: space-between;
+//      align-items: center;
+//      font-weight: bold;
+//      font-style: italic;
+//      padding: 0 80px;
+//
+//      &Left {
+//        width: 60%;
+//
+//        &Text {
+//          font-size: 20pt;
+//          text-align: left;
+//        }
+//      }
+//
+//      .sign {
+//        height: 170px;
+//      }
+//
+//      &Right {
+//        align-self: end;
+//        margin-bottom: 10px;
+//
+//        .fullName {
+//          font-size: 18pt;
+//          text-align: right;
+//        }
+//
+//        .date {
+//          font-size: 14pt;
+//          text-align: right;
+//          margin-top: 20px;
+//        }
+//      }
+//    }
+//  }
+//}

@@ -1,0 +1,23 @@
+@import '@stylesheets/variables';
+
+@import url('https://fonts.googleapis.com/css2?family=Jura:wght@300;400;500&display=swap');
+
+* {
+  box-sizing: border-box;
+  font-family: 'Flow Ext', sans-serif;
+  margin: 0;
+}
+
+html {
+  font-size: 16px;
+}
+
+body {
+  background-color: var(--tg-theme-bg-color);
+  color: var(--tg-theme-text-color);
+
+  // mobile
+  @media (min-width: 901px) and (max-width: 1200px) {
+    font-size: 4rem;
+  }
+}
