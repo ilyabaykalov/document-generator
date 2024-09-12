@@ -20,7 +20,7 @@ const LandscapePostcardComponent = () => {
 		if (settingsState.person) {
 			const dateDifference = moment(settingsState.selectedDate).year() - moment(settingsState.person.birthday).year();
 
-			return dateDifference % 10 === 0;
+			return (dateDifference % 10 === 0) || (dateDifference % 5 === 0);
 		}
 
 		return false

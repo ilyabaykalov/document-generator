@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react';
 import {
 	FormControl, InputLabel,
 	OutlinedInput, SelectChangeEvent, ToggleButton,
-	ToggleButtonGroup, Select, MenuItem,
+	ToggleButtonGroup, Select, MenuItem, IconButton,
 } from '@mui/material';
 
 import moment from 'moment/moment';
@@ -12,6 +12,8 @@ import { StaticDatePicker } from '@mui/x-date-pickers/StaticDatePicker';
 import { AdapterMoment } from '@mui/x-date-pickers/AdapterMoment';
 
 import { PickerValidDate } from '@mui/x-date-pickers';
+
+import { PersonManualSettings, PersonAutoSettings } from '@components';
 
 import { PersonProperties, State } from '@interfaces';
 
@@ -26,13 +28,9 @@ const SettingsComponent = () => {
 
 	const [ selectedPersonId, setSelectedPersonId ] = useState<string>('0');
 	const [ selectedDate, setSelectedPickerDate ] = useState<PickerValidDate>(null);
+	const [ isManualEntryOfPerson, setManualEntryOfPerson ] = useState<boolean>(false);
 
-	const persons: PersonProperties[] = useSelector((state: State) => state.personsState.persons);
-
-	const personsByBirthday: PersonProperties[] = useSelector((state: State) =>
-		state.personsState.persons.filter(({ birthday }) =>
-			moment(selectedDate).dayOfYear() === moment(birthday).dayOfYear() + 1),
-	);
+	const persons: PersonProperties[] = useSelector(({ personsState }: State) => personsState.persons);
 
 	const postcardFormat: string = useSelector(({ settingsState }: State) => settingsState.postcardFormat);
 	const orientation: string = useSelector(({ settingsState }: State) => settingsState.orientation);
@@ -40,6 +38,7 @@ const SettingsComponent = () => {
 	const resetSelectedPersonId = () => {
 		if (selectedPersonId !== '0') {
 			setSelectedPersonId('0');
+
 			dispatch(setPerson({ person: null }));
 		}
 	};
@@ -68,38 +67,33 @@ const SettingsComponent = () => {
 		dispatch(setPerson({ person: selectedPerson || null }));
 	};
 
-	const onPostcardFormatChangeHandler = (event: React.MouseEvent<HTMLElement>, postcardFormat: string) =>
+	const onPostcardFormatChangeHandler = (_: React.MouseEvent<HTMLElement>, postcardFormat: string) =>
 		dispatch(setPostcardFormat({ postcardFormat }));
 
-	const onOrientationChangeHandler = (event: React.MouseEvent<HTMLElement>, orientation: string) =>
+	const onOrientationChangeHandler = (_: React.MouseEvent<HTMLElement>, orientation: string) =>
 		dispatch(setOrientation({ orientation }));
+
+	const onManualSettingsToggleHandler = () => {
+		setManualEntryOfPerson((prevState) => !prevState);
+	};
 
 	return (
 		<FormControl className={ styles.settingsForm }>
-			<InputLabel id={ 'full-name-label' }>Кого поздравляем?</InputLabel>
-			<Select labelId={ 'full-name-label' } required
-			        input={ <OutlinedInput label="Кого поздравляем?"/> }
-			        value={ selectedPersonId }
-			        onChange={ onPersonChangeHandler }>
-				<MenuItem key={ 0 } value={ 0 }>
-					Не выбрано значение
-				</MenuItem>
-				{
-					personsByBirthday.map((person) =>
-						<MenuItem key={ person.id } value={ person.id }>
-							{ person.lastName } { person.firstName } { person.middleName }
-						</MenuItem>,
-					)
-				}
-			</Select>
+			{
+				isManualEntryOfPerson
+					? <PersonManualSettings onManualSettingsToggleHandler={ onManualSettingsToggleHandler }/>
+					: <PersonAutoSettings
+						selectedPersonId={ selectedPersonId }
+						onPersonChangeHandler={ onPersonChangeHandler }
+						onManualSettingsToggleHandler={ onManualSettingsToggleHandler }/>
+			}
 
 			<ToggleButtonGroup
 				color="primary"
 				className={ styles.toggleGroup }
 				value={ postcardFormat }
 				exclusive fullWidth
-				onChange={ onPostcardFormatChangeHandler }
-				aria-label="Platform">
+				onChange={ onPostcardFormatChangeHandler }>
 				<ToggleButton value="official">Официально</ToggleButton>
 				<ToggleButton value="unofficial">Как друзей</ToggleButton>
 			</ToggleButtonGroup>
@@ -109,8 +103,7 @@ const SettingsComponent = () => {
 				className={ styles.toggleGroup }
 				value={ orientation }
 				exclusive fullWidth disabled
-				onChange={ onOrientationChangeHandler }
-				aria-label="Platform">
+				onChange={ onOrientationChangeHandler }>
 				<ToggleButton value="portrait">Портретная</ToggleButton>
 				<ToggleButton value="landscape">Альбомная</ToggleButton>
 			</ToggleButtonGroup>

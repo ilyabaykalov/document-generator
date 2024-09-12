@@ -50,7 +50,7 @@ const PreviewComponent = () => {
 
 				<Button
 					className={ styles.downloadButton }
-					variant="outlined" disabled={ isDone }
+					variant='outlined' disabled={ isDone }
 					onClick={ onDownloadClickHandler }>Скачать</Button>
 			</div>
 

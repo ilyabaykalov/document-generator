@@ -1,0 +1,18 @@
+.manualPerson {
+  display: flex;
+  flex-direction: column;
+  row-gap: 10px;
+
+  & > div:nth-child(1) {
+    display: flex;
+    justify-content: space-between;
+
+    .lastNameInput {
+      width: 100%;
+    }
+  }
+
+  .toggleMode {
+    width: 50px;
+  }
+}

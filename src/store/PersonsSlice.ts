@@ -1,44 +1,24 @@
 import { createSlice } from '@reduxjs/toolkit';
 
 import { PersonsProperties } from '@interfaces';
-import moment from 'moment/moment';
 
 const initialState: PersonsProperties = {
-	persons: [ {
-		id: '1',
-		firstName: 'Василий',
-		lastName: 'Габов',
-		middleName: 'Петрович',
-		birthday: moment('1974-09-14').toDate(),
-		gender: 'man'
-	}, {
-		id: '2',
-		firstName: 'Петр',
-		lastName: 'Малинин',
-		middleName: 'Геннадьевич',
-		birthday: moment('1975-09-13').toDate(),
-		gender: 'man'
-	}, {
-		id: '3',
-		firstName: 'Елена',
-		lastName: 'Ковенкова',
-		middleName: 'Павловна',
-		birthday: moment('1975-09-12').toDate(),
-		gender: 'woman'
-	}, {
-		id: '4',
-		firstName: 'Андрей',
-		lastName: 'Юсупов',
-		middleName: 'Петрович',
-		birthday: moment('1975-09-13').toDate(),
-		gender: 'man'
-	} ],
+	persons: [],
 };
 
 export const personsSlice = createSlice({
 	name: 'persons',
 	initialState,
-	reducers: null
-})
+	reducers: {
+		addPerson: (state: PersonsProperties, { payload }) => {
+			state.persons.push({
+				id: (state.persons.length + 1).toString(),
+				...payload.person,
+			});
+		},
+	},
+});
+
+export const { addPerson } = personsSlice.actions;
 
 export default personsSlice.reducer;
