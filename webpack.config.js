@@ -15,7 +15,7 @@ const webpackSettings = (_, argv) => {
 		mode: argv['mode'],
 		context: resolve('src'),
 		output: {
-			publicPath: '/',
+			publicPath: isDev ? '/' : './',
 			filename: filename('js'),
 			path: resolve('dist'),
 		},

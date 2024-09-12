@@ -1,8 +1,19 @@
 .preview {
   height: 100%;
 
+  @media (min-width: 901px) and (max-width: 1200px) {
+    display: flex;
+    flex-direction: column-reverse;
+  }
+
   .downloadButton {
-    margin-top: 30px;
+    margin: 30px 0;
+    width: 200px;
+
+    @media (min-width: 901px) and (max-width: 1200px) {
+      align-self: center;
+      margin: 0 0 30px 0;
+    }
   }
 }
 
