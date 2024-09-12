@@ -27,7 +27,7 @@ const webpackSettings = (_, argv) => {
 			historyApiFallback: true,
 		},
 		resolve: {
-			extensions: [ '.ts', '.tsx', '.js', '.jsx', '.scss', '.css', '.png' ],
+			extensions: [ '.ts', '.tsx', '.js', '.jsx', '.scss', '.css' ],
 			alias: {
 				'@pages': resolve('src/pages'),
 				'@components': resolve('src/components'),
@@ -40,11 +40,10 @@ const webpackSettings = (_, argv) => {
 				'@hooks': resolve('src/hooks'),
 				'@utils': resolve('src/utils'),
 				'@stylesheets': resolve('src/stylesheets'),
-				'@assets/*': resolve('public/assets/*'),
 			},
 		},
 		plugins: [
-			new DotenvPlugin({ path: './.env' }),
+			new DotenvPlugin({ path: '.env' }),
 			new HTMLWebpackPlugin({
 				template: resolve('public/index.html'),
 				favicon: resolve('public/favicon.ico'),

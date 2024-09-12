@@ -9,7 +9,7 @@ import styles from './PreviewComponent.module.scss';
 
 const PreviewComponent = () => {
 	const onDownloadClickHandler = () => {
-		const postcardPrintForm = document.getElementById('postcard')
+		const postcardPrintForm = document.getElementById('postcard');
 
 		html2canvas(postcardPrintForm, {
 			windowWidth: postcardPrintForm.offsetWidth,
@@ -17,7 +17,7 @@ const PreviewComponent = () => {
 			useCORS: true,
 			allowTaint: true,
 			scale: 4,
-			x: 0, y: 0
+			x: 0, y: 0,
 		}).then((canvas) => {
 			const link = document.createElement('a');
 			link.href = canvas.toDataURL('image/png');
@@ -29,11 +29,17 @@ const PreviewComponent = () => {
 	};
 
 	return (
-		<div className={ styles.preview }>
-			<PostcardComponent/>
+		<>
+			<div className={ styles.preview }>
+				<PostcardComponent/>
 
-			<Button onClick={ onDownloadClickHandler }>Скачать</Button>
-		</div>
+				<Button
+					className={ styles.downloadButton }
+					variant="outlined"
+					onClick={ onDownloadClickHandler }>Скачать</Button>
+			</div>
+
+		</>
 	);
 };
 
